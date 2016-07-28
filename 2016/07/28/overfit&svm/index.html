@@ -4,21 +4,23 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>为什么学 machine learning？ | 最爱赵敏丶</title>
+  <title>最爱赵敏丶</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在coursera上面学Andrew ng的ml课程。
-什么是机器学习？在我目前的理解中，机器学习是让机器根据大量数据，找出其中的规律，自己从中学到方法，并将其应用到实际问题上。从数学上来说是不断的调整自己参数，使得func比较拟合大量的样本点（此处存在过拟合的问题），使得机器可以根据新样本的特征得到的我们想得到的新样本的某些特征。ml有神马意义那？在样本特征较少时，人们可能会通过简单的模型直">
+  <meta name="description" content="title： 关于过拟合与SVM的理解
+tag： 机器学习过拟合相关过拟合问题是ML中的一个常见问题，简单来说就是过度的拟合了train set 而对要解决的实际问题（预测等等）的效果并不好，泛化能力弱。。这是由于train set中存在很多噪声，就是一些异常的样本（不按常理出牌），而训练model的时候会拟合这些异常情况，就导致了这个问题。要想解决这个问题就得使异常值得权重变低，处理过拟合总体思">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么学 machine learning？">
-<meta property="og:url" content="http://yoursite.com/2016/07/19/ml1/index.html">
+<meta property="og:title" content="最爱赵敏丶">
+<meta property="og:url" content="http://yoursite.com/2016/07/28/overfit&svm/index.html">
 <meta property="og:site_name" content="最爱赵敏丶">
-<meta property="og:description" content="最近在coursera上面学Andrew ng的ml课程。
-什么是机器学习？在我目前的理解中，机器学习是让机器根据大量数据，找出其中的规律，自己从中学到方法，并将其应用到实际问题上。从数学上来说是不断的调整自己参数，使得func比较拟合大量的样本点（此处存在过拟合的问题），使得机器可以根据新样本的特征得到的我们想得到的新样本的某些特征。ml有神马意义那？在样本特征较少时，人们可能会通过简单的模型直">
-<meta property="og:updated_time" content="2016-07-19T09:14:30.598Z">
+<meta property="og:description" content="title： 关于过拟合与SVM的理解
+tag： 机器学习过拟合相关过拟合问题是ML中的一个常见问题，简单来说就是过度的拟合了train set 而对要解决的实际问题（预测等等）的效果并不好，泛化能力弱。。这是由于train set中存在很多噪声，就是一些异常的样本（不按常理出牌），而训练model的时候会拟合这些异常情况，就导致了这个问题。要想解决这个问题就得使异常值得权重变低，处理过拟合总体思">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/b00ffde3jw1f6a0l4jrdgj21kw16oqf9.jpg">
+<meta property="og:updated_time" content="2016-07-28T15:05:57.491Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="为什么学 machine learning？">
-<meta name="twitter:description" content="最近在coursera上面学Andrew ng的ml课程。
-什么是机器学习？在我目前的理解中，机器学习是让机器根据大量数据，找出其中的规律，自己从中学到方法，并将其应用到实际问题上。从数学上来说是不断的调整自己参数，使得func比较拟合大量的样本点（此处存在过拟合的问题），使得机器可以根据新样本的特征得到的我们想得到的新样本的某些特征。ml有神马意义那？在样本特征较少时，人们可能会通过简单的模型直">
+<meta name="twitter:title" content="最爱赵敏丶">
+<meta name="twitter:description" content="title： 关于过拟合与SVM的理解
+tag： 机器学习过拟合相关过拟合问题是ML中的一个常见问题，简单来说就是过度的拟合了train set 而对要解决的实际问题（预测等等）的效果并不好，泛化能力弱。。这是由于train set中存在很多噪声，就是一些异常的样本（不按常理出牌），而训练model的时候会拟合这些异常情况，就导致了这个问题。要想解决这个问题就得使异常值得权重变低，处理过拟合总体思">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/mw690/b00ffde3jw1f6a0l4jrdgj21kw16oqf9.jpg">
   
   
     <link rel="icon" href="/favicon.png">
@@ -177,11 +179,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-ml1" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-overfit&amp;svm" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/07/19/ml1/" class="article-date">
-  	<time datetime="2016-07-19T09:07:18.076Z" itemprop="datePublished">2016-07-19</time>
+      <a href="/2016/07/28/overfit&svm/" class="article-date">
+  	<time datetime="2016-07-28T15:05:56.737Z" itemprop="datePublished">2016-07-28</time>
 </a>
     </div>
   
@@ -190,38 +192,16 @@
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      为什么学 machine learning？
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
-	</div>
-
-        
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在coursera上面学Andrew ng的ml课程。</p>
-<h2 id="什么是机器学习？"><a href="#什么是机器学习？" class="headerlink" title="什么是机器学习？"></a>什么是机器学习？</h2><p>在我目前的理解中，机器学习是让机器根据大量数据，找出其中的规律，自己从中学到方法，并将其应用到实际问题上。从数学上来说是不断的调整自己参数，使得func比较拟合大量的样本点（此处存在过拟合的问题），使得机器可以根据新样本的特征得到的我们想得到的新样本的某些特征。<br>ml有神马意义那？<br>在样本特征较少时，人们可能会通过简单的模型直接得到自己想要的结果。eg：房价大致上与房子的面积一般成正比，等这种十分简单的问题，由于特征较少，人们可能很容易发现两者之间的联系，但是如果特征变得很多的话，特征达到上百甚至上万（eg：自动驾驶技术需要考虑到许多的因素，会具有很多的feature），人再想得到或发现之中的关系就比较困难了，这种问题就需要交给计算机来自己发现规律。机器学习提供的是一种让计算机自我发现规律的方法，而不是特定的程序算法。<br><a id="more"></a><br>通过大量数据来不断地训练计算机（程序），就像小孩不断地做题目一样，不断地强化自己，从而得到越来越好的结果。</p>
-<h2 id="有啥用？"><a href="#有啥用？" class="headerlink" title="有啥用？"></a>有啥用？</h2><p>我十分看好机器学习，目前信息革命已经逐渐的由造计算机转换成用计算机。机器学习是教计算机想人一样学习一些技能，而计算机相对于人来说在某些方面有着很大的优势。未来将逐步代替许多需要重复劳动不需要创造的工种，由于这些技术机器可以通过学习掌握。eg：司机，目前正在研究的自动驾驶技术、医生（不做手术的那种），一般医生看病会根据病人提供的多种特征，症状、病史、化验单等等相关特征去自己的知识库里面检索对应的信息，从而对症下药，显然计算机会在这方面做得更好。</p>
-<h2 id="我为啥要学？"><a href="#我为啥要学？" class="headerlink" title="我为啥要学？"></a>我为啥要学？</h2><p>本科cs，还要读cs研究生，传统情况下出来就是码农一枚，可能都觉得码农工资高，条件好，大公司多。但是仔细一想这个工作真的是门槛有点低，培训几个月就能出来干工程了，干了几年之后与新生代码农相比优势在哪里？技术更新换代那么快，经验上的优势就没传统行业那么大了。所以还是要读个研究生学点门槛高点的，努力使自己不可替代。机器学习涉及到了大量数学知识门槛相对来说比较高（如果仅仅是不思考，直接套工具的话就另说了），而且很有用，所以就它了。<br>知乎上有人问<a href="https://www.zhihu.com/question/27809894" target="_blank" rel="external">计算机行业能火几年？</a>下面有个回答让我印象深刻</p>
-<blockquote>
-<p>真正能历久弥新、坚如磐石的是计算机科学，而不是“计算机行业”（更不是写APP写网站的码农）。<br>今时今日，你问我支不支持年轻人学计算机科学，我是支持的。<br>它能完成时代浪潮赋予的使命，也有经得起时间检验的生命力。</p>
-</blockquote>
-<p>cs是个好专业，ml是个好方向，希望我能学好。</p>
+        <p>title： 关于过拟合与SVM的理解</p>
+<h2 id="tag：-机器学习"><a href="#tag：-机器学习" class="headerlink" title="tag： 机器学习"></a>tag： 机器学习</h2><h2 id="过拟合相关"><a href="#过拟合相关" class="headerlink" title="过拟合相关"></a>过拟合相关</h2><p>过拟合问题是ML中的一个常见问题，简单来说就是过度的拟合了train set 而对要解决的实际问题（预测等等）的效果并不好，泛化能力弱。。这是由于train set中存在很多噪声，就是一些异常的样本（不按常理出牌），而训练model的时候会拟合这些异常情况，就导致了这个问题。<br>要想解决这个问题就得使异常值得权重变低，处理过拟合总体思路就是尽量减少异常样本对模型的影响：</p>
+<ul>
+<li>列表项样本多点，异常的样本就显得有点孤零零的了，权重就变低喽。</li>
+<li>归一化。一般model为了拟合异常的点会使func的曲线波动幅度较大，这种情况下参数Θ的数值一般都比较大。而较好的model的func的曲线一般比较平滑，Θ的值一般比较小（来自知乎某大神，没有证明，但是想想实际上的确是这样），所以在cost func里加入一个归一化参数 λ（ps：svm中的C=1/λ），降低Θ。</li>
+<li>减少多项式的项（不知道对不对）。我觉得这应该是可行的，因为func中的项少了，想要拟合异常的点就心有余而力不足了。</li>
+</ul>
+<h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><p>SVM为啥被称作large margin classifier呢？官方解释是：SVM尝试发现一个与样本数据集有着最大间隔的判定边界。<br>为啥是这样那？我的理解是，||Θ||越小，cost func越小，目标是要找到一个Θ满足SVM的条件，又要使||Θ||最小。而一个与样本数据集有着最大间隔的判定边界这种情况恰好满足了这种情况。见下图：<img src="http://ww1.sinaimg.cn/mw690/b00ffde3jw1f6a0l4jrdgj21kw16oqf9.jpg" alt="||Θ||与margin之间的关系"></p>
 
       
     </div>
@@ -231,18 +211,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/07/28/overfit&svm/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/14/2016-4-14/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Something about Soul</div>
+    <a href="/2016/07/19/ml1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">为什么学 machine learning？</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -277,7 +248,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ml1" data-title="为什么学 machine learning？" data-url="http://yoursite.com/2016/07/19/ml1/"></div>
+	<div class="ds-thread" data-thread-key="overfit&amp;svm" data-title="" data-url="http://yoursite.com/2016/07/28/overfit&amp;svm/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
