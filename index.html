@@ -70,7 +70,7 @@
 						<li>Tags</li>
 						
 						
-						<li>Über</li>
+						<li>About</li>
 						
 					</ul>
 				</div>
@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/机器学习/" style="font-size: 20px;">机器学习</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -188,25 +188,36 @@
       <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/28/overfit&svm/">关于过拟合与SVM的理解</a>
+    </h1>
+  
+
+      </header>
+      
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title： 关于过拟合与SVM的理解</p>
-<h2 id="tag：-机器学习"><a href="#tag：-机器学习" class="headerlink" title="tag： 机器学习"></a>tag： 机器学习</h2><h2 id="过拟合相关"><a href="#过拟合相关" class="headerlink" title="过拟合相关"></a>过拟合相关</h2><p>过拟合问题是ML中的一个常见问题，简单来说就是过度的拟合了train set 而对要解决的实际问题（预测等等）的效果并不好，泛化能力弱。。这是由于train set中存在很多噪声，就是一些异常的样本（不按常理出牌），而训练model的时候会拟合这些异常情况，就导致了这个问题。<br>要想解决这个问题就得使异常值得权重变低，处理过拟合总体思路就是尽量减少异常样本对模型的影响：</p>
-<ul>
-<li>列表项样本多点，异常的样本就显得有点孤零零的了，权重就变低喽。</li>
-<li>归一化。一般model为了拟合异常的点会使func的曲线波动幅度较大，这种情况下参数Θ的数值一般都比较大。而较好的model的func的曲线一般比较平滑，Θ的值一般比较小（来自知乎某大神，没有证明，但是想想实际上的确是这样），所以在cost func里加入一个归一化参数 λ（ps：svm中的C=1/λ），降低Θ。</li>
-<li>减少多项式的项（不知道对不对）。我觉得这应该是可行的，因为func中的项少了，想要拟合异常的点就心有余而力不足了。</li>
-</ul>
-<h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><p>SVM为啥被称作large margin classifier呢？官方解释是：SVM尝试发现一个与样本数据集有着最大间隔的判定边界。<br>为啥是这样那？我的理解是，||Θ||越小，cost func越小，目标是要找到一个Θ满足SVM的条件，又要使||Θ||最小。而一个与样本数据集有着最大间隔的判定边界这种情况恰好满足了这种情况。见下图：<img src="http://ww1.sinaimg.cn/mw690/b00ffde3jw1f6a0l4jrdgj21kw16oqf9.jpg" alt="||Θ||与margin之间的关系"></p>
-
+        <h2 id="过拟合相关"><a href="#过拟合相关" class="headerlink" title="过拟合相关"></a>过拟合相关</h2><p>过拟合问题是ML中的一个常见问题，简单来说就是过度的拟合了train set 而对要解决的实际问题（预测等等）的效果并不好，泛化能力弱。。这是由于train set中存在很多噪声，就是一些异常的样本（不按常理出牌），而训练model的时候会拟合这些异常情况，就导致了这个问题。<br>要想解决这个问题就得使异常值得权重变低，处理过拟合总体思路就是尽量减少异常样本对模型的影响：<br>
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+	</div>
+
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/28/overfit&svm/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
